@@ -2,9 +2,11 @@ import discord
 import os
 import json
 import requests
+from discord.ext import commands
 
 
 client = discord.Client()
+client = commands.Bot(command_prefix = ';;')#prefix is ;;
 
 def grab_quote():
   response = requests.get("https://zenquotes.io/api/random") #get stuff from zenquotes api
@@ -17,21 +19,17 @@ def grab_quote():
 async def on_ready():
     print(f' {client.user} is logged in and ready to RUMBLEEEE!!!!' ) #get exited when ready
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:# dont respond to our selves
-        return
+@client.command()
+async def ping(ctx):
+    await ctx.send("pong!")
+@client.command()
+async def hi(ctx):
+    await ctx.send("hey!")
+@client.command()
+async def quote(ctx):
+  await ctx.send(grab_quote())
 
-    if message.content == (';;help'):
-        await message.channel.send('I can play music from Youtube and send you a quote if you want, You can address me with ;;')
-    
-    if message.content == (";;quote"):
-      await message.channel.send(grab_quote()) #calling grab quote function for a quote
-    
-    if message.content == ("hello"):
-       await message.channel.send("Whats up!") 
-    if message.content == ("Hello"):
-       await message.channel.send("Whats up!") 
+   
 
 
     
