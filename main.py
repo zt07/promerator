@@ -23,7 +23,7 @@ async def on_message(message):
         return
 
     if message.content == (';;help'):
-        await message.channel.send('You can address me by startring with ;;')
+        await message.channel.send('I can play music from Youtube and send you a quote if you want, You can address me with ;;')
     
     if message.content == (";;quote"):
       await message.channel.send(grab_quote()) #calling grab quote function for a quote
