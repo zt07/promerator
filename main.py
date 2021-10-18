@@ -1,8 +1,10 @@
 import discord
+import asyncio
 import os
 import json
 import requests
 from discord.ext import commands
+from discord.ext.commands import has_permissions
 
 
 client = discord.Client()
@@ -28,12 +30,10 @@ async def hi(ctx):
 @client.command()
 async def quote(ctx):
   await ctx.send(grab_quote())
-
-   
-
 @client.command()
+@commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=10):
-  if amount > 500: await ctx.send("You cant delete that many messages!") #so you can go oon and lag everything.
+  if amount > 500: await ctx.send("You cant delete that many messages!") #so it wont lag
   else:
     await ctx.channel.purge(limit=amount)#clears messages
 
