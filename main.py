@@ -18,19 +18,24 @@ def grab_quote():
 @client.event
 async def on_ready():
     print(f' {client.user} is logged in and ready to RUMBLEEEE!!!!' ) #get exited when ready
+    
+@client.event
+async def on_message(message):
+    if message.author == client.user:# dont respond to our selves
+        return
+
 
 @client.command()
-async def ping(ctx):
-    await ctx.send("pong!")
-@client.command()
 async def hi(ctx):
-    await ctx.send("hey!")
+  await ctx.send("hey!")
 @client.command()
 async def quote(ctx):
   await ctx.send(grab_quote())
 
-   
-
+#@client.command()
+#async def clear(ctx, amount=10):
+  #await ctx.channel.purge(list=amount)#clears messages
+ 
 
     
      
