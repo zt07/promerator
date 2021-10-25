@@ -6,12 +6,15 @@ import requests
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 import DiscordUtils
+#Written by Zaheeb Tariq courtesy of the above libraries of course zaheeb07@gmail.com though response might take a while
 
 music=DiscordUtils.Music()
 client = discord.Client()
-client = commands.Bot(command_prefix=';;')  #prefix is ;;
-green = discord.Color.green()
-def grab_quote():
+client = commands.Bot(command_prefix=';;',help_command=None)  #prefix is ;;, when a user wishes to address the bot, type in ;; then your command EX: ;;play.
+
+green = discord.Color.green()# sort of a shortcut for code so instead of having to type out discord.Color.green() you can just say green. 
+
+def grab_quote(): #defining a fuction here so we can just call or type out "grab_quote()" instead of what is below.
     response = requests.get(
         "https://zenquotes.io/api/random")  #get stuff from zenquotes api
     json_data = json.loads(response.text)
@@ -25,22 +28,26 @@ async def on_ready():
     print(f' {client.user} is logged in and ready to RUMBLEEEE!!!!'
           )  #get exited when ready
 
-
-
-  
-
-
-
 @client.command()
 async def ping(ctx):
   await ctx.send("no")
-                
+ #only a test command      
 
+@client.command()
+async def help(ctx):
+  embed = discord.Embed(title="Welcome to ZT's Music!",
+   description="Here is a list of commands to guide you. ",
+   color=green)
+  await ctx.send(embed=embed)
+
+
+@client.command(breif="test command", description="test commanddesc")
+async def test(ctx):
+  await ctx.send("Check!")
 
 @client.command()
 async def hi(ctx):
-
-  await ctx.send("Whats up!")
+  await ctx.send("Whats up!")#responds with whats up whena  user types ;;hi
 
 
 @client.command()
@@ -134,13 +141,6 @@ async def embed(ctx):
     await ctx.send(embed=embed) # trying to learn embeds
 
 
-async def paginate(ctx):
-    embed1 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 1")
-    embed2 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 2")
-    embed3 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 3")
-    paginator = DiscordUtils.Pagination.AutoEmbedPaginator(ctx)
-    embeds = [embed1, embed2, embed3]
-    await paginator.run(embeds)
 
 
 

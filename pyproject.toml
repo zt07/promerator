@@ -2,7 +2,7 @@
 name = "zts-music"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Zaheeb Tariq aaheeb07@gmail.com"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
