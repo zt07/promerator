@@ -10,7 +10,7 @@ import DiscordUtils
 
 music=DiscordUtils.Music()
 client = discord.Client()
-client = commands.Bot(command_prefix=';;',help_command=None)  #prefix is ;;, when a user wishes to address the bot, type in ;; then your command EX: ;;play.
+client = commands.Bot(command_prefix=';;')  #prefix is ;;, when a user wishes to address the bot, type in ;; then your command EX: ;;play.
 
 green = discord.Color.green()# sort of a shortcut for code so instead of having to type out discord.Color.green() you can just say green. 
 
@@ -34,16 +34,32 @@ async def ping(ctx):
  #only a test command      
 
 @client.command()
-async def help(ctx):
-  embed = discord.Embed(title="Welcome to ZT's Music!",
-   description="Here is a list of commands to guide you. ",
-   color=green)
+async def helpp(ctx):
+  embed = discord.Embed(title="Welcome to ZT's Music!", description="Here are the commands to use the bot. Make sure before each command to type ';;' Example: ;;j ", color=green)
+  embed.add_field(name="j (Join)", value="Joins the voice channel you are in (You must use this before the P command or it wont work)", inline=True)
+  
+  embed.add_field(name="p (play)", value="plays whatever music you selected, make sure you put in a search term such as 'Nyan Cat' or paste in the exact link.", inline=True)
+ 
+  embed.add_field(name="hi", value="Responds with Whats up!" , inline=True)
+  embed.add_field(name="quote", value="Responds with a cool quote." , inline=True)
+  embed.add_field(name="test", value="Will stay while the bot is in development" , inline=True)
+  embed.add_field(name="l (Leave)", value="Ends the music and leaves your voice channel" , inline=True)
+  embed.add_field(name="q (Queue)", value="Shows you the list of songs queued up" , inline=True)
+  embed.add_field(name="rem", value="Remove a song from he queue For it to work you have to put a number that corrsponds with its place in queue For example: song1, song2, song3, song4, If you wish to remove song 1 then type ;;rem 0 or for song 1 type rem 2,for song2 type rem 3 and so on. ", inline=False)
+  embed.add_field(name="loop", value="Puts the current song on repeat, use the command agian to disable" , inline=True)
+  embed.add_field(name="pa", value="Pauses the song in its current place" , inline=True)
+  embed.add_field(name="r", value="Resumes the song after you pause it." , inline=True)
+  embed.add_field(name="skip", value="Skips the song and goes tot he next one in queue" , inline=True)
+  embed.add_field(name="clear", value="Deletes the amount of messages you specify limit is 500 messages. To use this type: clear 20(You can replace 20 with whatver number less then 500.)  (Only works if you have the Manage Messages role." , inline=False)
+  
+  
+  
   await ctx.send(embed=embed)
 
 
 @client.command(breif="test command", description="test commanddesc")
 async def test(ctx):
-  await ctx.send("Check!")
+  await ctx.send(discord.Embed(title=f"Check", color = green))
 
 @client.command()
 async def hi(ctx):
@@ -58,7 +74,8 @@ async def quote(ctx):
 @client.command()
 async def j(ctx):
     if ctx.author.voice is None:
-        await ctx.send("get in a voice channel first")
+        embed= discord.Embed(title="Failed :(", description=f"Get in a Voice Channel", color=green)
+        await ctx.send(embed =embed)
     if ctx.voice_client is None:
         await ctx.author.voice.channel.connect()
     else:
@@ -67,7 +84,7 @@ async def j(ctx):
 
 @client.command()
 async def l(ctx): #leaves the vc it is in.
-  await ctx.voice_client.disconnect()
+  await ctx.voice_client.disconnect() #Embedified
   await ctx.send("goodbye!")
 
 @client.command()
@@ -76,12 +93,14 @@ async def p(ctx,*,url):
   if not player:
     player = music.create_player(ctx, ffmpeg_error_betterfix=True)
   if not ctx.voice_client.is_playing():
-    await player.queue(url, search = True)
+    await player.queue(url, search = True) #embedified 
     song = await player.play()
-    await ctx.send(f"Playing {song.name}") #plays a song from a url or just typin gin what you want to hear.
+    embed = discord.Embed(title=f"Now playing!", description=f"{song.name}", color=green)
+    await ctx.send(embed=embed) #plays a song from a url or just typin gin what you want to hear.
   else:
     song = await player.queue(url, search=True)
-    await ctx.send(f"{song.name} added to queue")
+    embed = discord.Embed(title="Added to queue!", description=f"{song.name} Has been added.", color=green)
+    await ctx.send(embed=embed) 
 
 @client.command()
 async def q(ctx):
@@ -92,36 +111,41 @@ async def q(ctx):
 async def loop(ctx):
     player = music.get_player(guild_id=ctx.guild.id)
     song = await player.toggle_song_loop()
-    if song.is_looping:
-        await ctx.send(f"Enabled loop for {song.name}")
-    else:
-        await ctx.send(f"Disabled loop for {song.name}")
+    if song.is_looping: #embedified
+      embed=discord.Embed(title=f"Enabled loop!",description=f"loop has been enabled for {song.name}", color =green) 
+      await ctx.send(embed=embed)
+    else:#toggles on looping the song 
+      embed=discord.Embed(title=f"Disabled loop!",description=f"loop has been Disabled for {song.name}", color =green) 
+      await ctx.send(embed=embed)
 
 @client.command()
 async def pa(ctx):
     player = music.get_player(guild_id=ctx.guild.id)#pasues the music where it's at
     song = await player.pause()
-    await ctx.send(f"{song.name} paused!")
+    
+    await ctx.send(embed=embed)
 
 @client.command()
-async def res(ctx):
+async def r(ctx):
     player = music.get_player(guild_id=ctx.guild.id)
     song = await player.resume()
-    await ctx.send(f"{song.name} playing!")#resumes the audio
+    embed=discord.Embed(title="Resumed", description=f"{song.name} is now playing!", color=green)
+    await ctx.send(embed=embed)#resumes the audio
 
 @client.command()
 async def skip(ctx):
     player = music.get_player(guild_id=ctx.guild.id)
     data = await player.skip(force=True)
     if len(data) == 2:
-        await ctx.send(f"Skipped from {data[0].name} to {data[1].name}")
+        await ctx.send(f"Skipped!")
     else:
-        await ctx.send(f"Skipped {data[0].name}")
+        await ctx.send(f"Skipped!")
 @client.command()
 async def rem(ctx, index):
     player = music.get_player(guild_id=ctx.guild.id)
     song = await player.remove_from_queue(int(index))
-    await ctx.send(f"Removed {song.name} from queue")
+    embed=discord.Embed(title="Removed!", description=f"{song.name} has been removed from queue!", color=green)
+    await ctx.send(embed = embed)
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
@@ -130,7 +154,8 @@ async def clear(ctx, amount=10):
         await ctx.send("You cant delete that many messages!")  #so it wont lag
     else:
         await ctx.channel.purge(limit=amount)  #clears messages
-        await ctx.send(str(amount) + " messages deleted!")
+        embed=discord.Embed(title="Messages cleared!", description=f"{str(amount)} +  messages deleted!", color=green)
+        await ctx.send(embed = embed)
 
 
 @client.command()
