@@ -6,11 +6,14 @@ import requests
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 import DiscordUtils
+from keep_alive import keepAlive
+
 #Written by Zaheeb Tariq courtesy of the above libraries of course zaheeb07@gmail.com though response might take a while
+
 
 music=DiscordUtils.Music()
 client = discord.Client()
-client = commands.Bot(command_prefix=';;')  #prefix is ;;, when a user wishes to address the bot, type in ;; then your command EX: ;;play.
+client = commands.Bot(command_prefix=';;', help_command=None)  #prefix is ;;, when a user wishes to address the bot, type in ;; then your command EX: ;;play.
 
 green = discord.Color.green()# sort of a shortcut for code so instead of having to type out discord.Color.green() you can just say green. 
 
@@ -34,7 +37,7 @@ async def ping(ctx):
  #only a test command      
 
 @client.command()
-async def helpp(ctx):
+async def help(ctx):
   embed = discord.Embed(title="Welcome to ZT's Music!", description="Here are the commands to use the bot. Make sure before each command to type ';;' Example: ;;j ", color=green)
   embed.add_field(name="j (Join)", value="Joins the voice channel you are in (You must use this before the P command or it wont work)", inline=True)
   
@@ -51,15 +54,20 @@ async def helpp(ctx):
   embed.add_field(name="r", value="Resumes the song after you pause it." , inline=True)
   embed.add_field(name="skip", value="Skips the song and goes tot he next one in queue" , inline=True)
   embed.add_field(name="clear", value="Deletes the amount of messages you specify limit is 500 messages. To use this type: clear 20(You can replace 20 with whatver number less then 500.)  (Only works if you have the Manage Messages role." , inline=False)
+  embed.add_field(name="Source", value="Source code for this bot is shown here." , inline=False)
   
   
   
   await ctx.send(embed=embed)
-
+@client.command()
+async def source(ctx):
+    embed=discord.Embed(title="Source", url="https://github.com/zt07/ZT-s-Music", color=green)
+    await ctx.send(embed=embed)
 
 @client.command(breif="test command", description="test commanddesc")
 async def test(ctx):
-  await ctx.send(discord.Embed(title=f"Check", color = green))
+  embed= discord.Embed(title=f"Check!", color = green)
+  await ctx.send(embed=embed)
 
 @client.command()
 async def hi(ctx):
@@ -68,7 +76,8 @@ async def hi(ctx):
 
 @client.command()
 async def quote(ctx):
-    await ctx.send(grab_quote())
+  embed=discord.Embed(title="Here you go!", description=grab_quote(),color=green)
+  await ctx.send(embed=embed)
 
 
 @client.command()
@@ -105,7 +114,8 @@ async def p(ctx,*,url):
 @client.command()
 async def q(ctx):
   player = music.get_player(guild_id=ctx.guild.id)
-  await ctx.send(f"{', '.join([song.name for song in player.current_queue()])}")# displays the queue
+  embed=discord.Embed(title="Current queue", description=f"{', '.join([song.name for song in player.current_queue()])}", color=green)
+  await ctx.send(embed=embed)# displays the queue
 
 @client.command()
 async def loop(ctx):
@@ -121,14 +131,14 @@ async def loop(ctx):
 @client.command()
 async def pa(ctx):
     player = music.get_player(guild_id=ctx.guild.id)#pasues the music where it's at
-    song = await player.pause()
-    
+    song = await player.pause()#embedded
+    embed=discord.Embed(title="Paused!", description=f"{song.name} is now paused", color=green)
     await ctx.send(embed=embed)
 
 @client.command()
 async def r(ctx):
     player = music.get_player(guild_id=ctx.guild.id)
-    song = await player.resume()
+    song = await player.resume()#embedded
     embed=discord.Embed(title="Resumed", description=f"{song.name} is now playing!", color=green)
     await ctx.send(embed=embed)#resumes the audio
 
@@ -137,13 +147,15 @@ async def skip(ctx):
     player = music.get_player(guild_id=ctx.guild.id)
     data = await player.skip(force=True)
     if len(data) == 2:
-        await ctx.send(f"Skipped!")
-    else:
-        await ctx.send(f"Skipped!")
+      embed=discord.Embed(title="Skipped", description="Current song has been skipped!", color=green)
+      await ctx.send(embed=embed)
+    else:#skips your song
+        embed=discord.Embed(title="Skipped", description="Current song has been skipped!", color=green)
+        await ctx.send(embed=embed)
 @client.command()
 async def rem(ctx, index):
     player = music.get_player(guild_id=ctx.guild.id)
-    song = await player.remove_from_queue(int(index))
+    song = await player.remove_from_queue(int(index))#removes a song in queue
     embed=discord.Embed(title="Removed!", description=f"{song.name} has been removed from queue!", color=green)
     await ctx.send(embed = embed)
 
@@ -154,16 +166,10 @@ async def clear(ctx, amount=10):
         await ctx.send("You cant delete that many messages!")  #so it wont lag
     else:
         await ctx.channel.purge(limit=amount)  #clears messages
-        embed=discord.Embed(title="Messages cleared!", description=f"{str(amount)} +  messages deleted!", color=green)
+        embed=discord.Embed(title="Messages cleared!", description=f"{str(amount)} messages deleted!", color=green)
         await ctx.send(embed = embed)
 
 
-@client.command()
-async def embed(ctx):
-    embed = discord.Embed(title="command sent",
-                          description="done",
-                          color=discord.Color.green())
-    await ctx.send(embed=embed) # trying to learn embeds
 
 
 
@@ -174,7 +180,7 @@ async def embed(ctx):
 
 
 
-
+keepAlive()
 my_secret = os.environ['TOKEN']
 
 client.run(os.getenv('TOKEN'))
