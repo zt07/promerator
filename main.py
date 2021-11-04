@@ -28,8 +28,9 @@ def grab_quote(): #defining a fuction here so we can just call or type out "grab
 
 @client.event
 async def on_ready():
-    print(f' {client.user} is logged in and ready to RUMBLEEEE!!!!'
-          )  #get exited when ready
+  await client.change_presence(activity=discord.Game(';;help'))
+  print(f' {client.user} is logged in and ready to RUMBLEEEE!!!!')
+          #get exited when ready and set status
 
 @client.command()
 async def ping(ctx):
@@ -53,6 +54,7 @@ async def help(ctx):
   embed.add_field(name="pa", value="Pauses the song in its current place" , inline=True)
   embed.add_field(name="r", value="Resumes the song after you pause it." , inline=True)
   embed.add_field(name="skip", value="Skips the song and goes tot he next one in queue" , inline=True)
+  #embed.add_field(name="Source", value="Source code for this bot is shown here." , inline=True)
   embed.add_field(name="clear", value="Deletes the amount of messages you specify limit is 500 messages. To use this type: clear 20(You can replace 20 with whatver number less then 500.)  (Only works if you have the Manage Messages role." , inline=False)
   embed.add_field(name="Source", value="Source code for this bot is shown here." , inline=False)
   
@@ -93,8 +95,9 @@ async def j(ctx):
 
 @client.command()
 async def l(ctx): #leaves the vc it is in.
-  await ctx.voice_client.disconnect() #Embedified
-  await ctx.send("goodbye!")
+  await ctx.voice_client.disconnect()
+  embed = discord.Embed(title=f"Stopped Playing!", description=f"I have left the voice channel", color=green) #Embedified
+  await ctx.send(embed=embed)
 
 @client.command()
 async def p(ctx,*,url):
@@ -114,7 +117,9 @@ async def p(ctx,*,url):
 @client.command()
 async def q(ctx):
   player = music.get_player(guild_id=ctx.guild.id)
-  embed=discord.Embed(title="Current queue", description=f"{', '.join([song.name for song in player.current_queue()])}", color=green)
+  embed=discord.Embed(title="Current queue", 
+  description=f"{', '.join([song.name for song in player.current_queue()])}", 
+  color=green)
   await ctx.send(embed=embed)# displays the queue
 
 @client.command()
