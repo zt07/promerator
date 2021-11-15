@@ -6,7 +6,9 @@ import requests
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 import DiscordUtils
+import random
 from keep_alive import keepAlive
+
 
 #Written by Zaheeb Tariq courtesy of the above libraries of course zaheeb07@gmail.com though response might take a while
 
@@ -54,7 +56,7 @@ async def help(ctx):
   embed.add_field(name="pa", value="Pauses the song in its current place" , inline=True)
   embed.add_field(name="r", value="Resumes the song after you pause it." , inline=True)
   embed.add_field(name="skip", value="Skips the song and goes tot he next one in queue" , inline=True)
-  #embed.add_field(name="Source", value="Source code for this bot is shown here." , inline=True)
+  embed.add_field(name="Source", value="Source code for this bot is shown here." , inline=True)
   embed.add_field(name="clear", value="Deletes the amount of messages you specify limit is 500 messages. To use this type: clear 20(You can replace 20 with whatver number less then 500.)  (Only works if you have the Manage Messages role." , inline=False)
   embed.add_field(name="Source", value="Source code for this bot is shown here." , inline=False)
   
@@ -174,15 +176,37 @@ async def clear(ctx, amount=10):
         embed=discord.Embed(title="Messages cleared!", description=f"{str(amount)} messages deleted!", color=green)
         await ctx.send(embed = embed)
 
+@client.command()
+async def randnum(ctx):
 
+    
+    def check(msg):
+        return msg.author == ctx.author and msg.content.isdigit() and \
+               msg.channel == ctx.channel
+							 
+    embed1=discord.Embed(title="type a number you want to randomize from.", description="Must be the smaller number.", color=green) 
+    await ctx.send(embed=embed1)
+    msg1 = await client.wait_for("message", check=check)
+    embed2=discord.Embed(title="Add your second number.", description="Must be greater then the previous number.", color=green) 
+    await ctx.send(embed=embed2)
+    msg2 = await client.wait_for("message", check=check)
+    x = int(msg1.content)
+    y = int(msg2.content)
+    if x < y:
+        value = random.randint(x,y)
+        embed3=discord.Embed(title="Your random number is...", description=f"{value}", color=green)
+        await ctx.send(embed=embed3)
+    else: embed4=discord.Embed(title="Failed", description="Please insure your first number is less then your second number", color=green) 
+    
+    await ctx.send(embed=embed4)
 
-
-
-
-
-
-
-
+#pip install py-cord
+#pip install DiscordUtils[voice]
+#run = """
+#pip install py-cord
+#pip install DiscordUtils[voice]
+#python main.py
+#"""
 
 
 keepAlive()
