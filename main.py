@@ -200,14 +200,20 @@ async def randnum(ctx):
     
     await ctx.send(embed=embed4)
 
-#pip install py-cord
-#pip install DiscordUtils[voice]
-#run = """
-#pip install py-cord
-#pip install DiscordUtils[voice]
-#python main.py
-#"""
+@client.commands()
+async def cogt(ctx,extension):
+	client.load_extension(f'cogs.{extension}')
 
+
+'''
+pip install py-cord
+pip install DiscordUtils[voice]
+run = """
+pip install py-cord
+pip install DiscordUtils[voice]
+python main.py
+"""
+'''
 
 keepAlive()
 my_secret = os.environ['TOKEN']
