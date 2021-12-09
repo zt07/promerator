@@ -8,7 +8,10 @@ from discord.ext.commands import has_permissions
 import DiscordUtils
 import random
 from keep_alive import keepAlive
-
+'''
+This code in documentation enough
+'''
+#jk
 
 #Written by Zaheeb Tariq courtesy of the above libraries of course zaheeb07@gmail.com though response might take a while
 
@@ -18,6 +21,10 @@ client = discord.Client()
 client = commands.Bot(command_prefix=';;', help_command=None)  #prefix is ;;, when a user wishes to address the bot, type in ;; then your command EX: ;;play.
 
 green = discord.Color.green()# sort of a shortcut for code so instead of having to type out discord.Color.green() you can just say green. 
+
+
+        
+    
 
 def grab_quote(): #defining a fuction here so we can just call or type out "grab_quote()" instead of what is below.
     response = requests.get(
@@ -34,44 +41,8 @@ async def on_ready():
   print(f' {client.user} is logged in and ready to RUMBLEEEE!!!!')
           #get exited when ready and set status
 
-@client.command()
-async def ping(ctx):
-  await ctx.send("no")
- #only a test command      
+					
 
-@client.command()
-async def help(ctx):
-  embed = discord.Embed(title="Welcome to ZT's Music!", description="Here are the commands to use the bot. Make sure before each command to type ';;' Example: ;;j ", color=green)
-  embed.add_field(name="j (Join)", value="Joins the voice channel you are in (You must use this before the P command or it wont work)", inline=True)
-  
-  embed.add_field(name="p (play)", value="plays whatever music you selected, make sure you put in a search term such as 'Nyan Cat' or paste in the exact link.", inline=True)
- 
-  embed.add_field(name="hi", value="Responds with Whats up!" , inline=True)
-  embed.add_field(name="quote", value="Responds with a cool quote." , inline=True)
-  embed.add_field(name="test", value="Will stay while the bot is in development" , inline=True)
-  embed.add_field(name="l (Leave)", value="Ends the music and leaves your voice channel" , inline=True)
-  embed.add_field(name="q (Queue)", value="Shows you the list of songs queued up" , inline=True)
-  embed.add_field(name="rem", value="Remove a song from he queue For it to work you have to put a number that corrsponds with its place in queue For example: song1, song2, song3, song4, If you wish to remove song 1 then type ;;rem 0 or for song 1 type rem 2,for song2 type rem 3 and so on. ", inline=False)
-  embed.add_field(name="loop", value="Puts the current song on repeat, use the command agian to disable" , inline=True)
-  embed.add_field(name="pa", value="Pauses the song in its current place" , inline=True)
-  embed.add_field(name="r", value="Resumes the song after you pause it." , inline=True)
-  embed.add_field(name="skip", value="Skips the song and goes tot he next one in queue" , inline=True)
-  embed.add_field(name="Source", value="Source code for this bot is shown here." , inline=True)
-  embed.add_field(name="clear", value="Deletes the amount of messages you specify limit is 500 messages. To use this type: clear 20(You can replace 20 with whatver number less then 500.)  (Only works if you have the Manage Messages role." , inline=False)
-  embed.add_field(name="Source", value="Source code for this bot is shown here." , inline=False)
-  
-  
-  
-  await ctx.send(embed=embed)
-@client.command()
-async def source(ctx):
-    embed=discord.Embed(title="Source", url="https://github.com/zt07/ZT-s-Music", color=green)
-    await ctx.send(embed=embed)
-
-@client.command(breif="test command", description="test commanddesc")
-async def test(ctx):
-  embed= discord.Embed(title=f"Check!", color = green)
-  await ctx.send(embed=embed)
 
 @client.command()
 async def hi(ctx):
@@ -200,9 +171,42 @@ async def randnum(ctx):
     
     await ctx.send(embed=embed4)
 
-@client.commands()
-async def cogt(ctx,extension):
-	client.load_extension(f'cogs.{extension}')
+
+@client.command()
+async def passcheck(ctx,password):  #checks how secure a password is with a score rating.
+	await ctx.message.delete()
+	score=0
+	password=str(password)#makes password a string to work with
+	if len(password)<4 or len(password)>12:
+		embed=discord.Embed(tittle="Most websites wont except that length, try a password beetween 4 and 12 characters long.",color=green)
+		await ctx.send(emebd=embed)
+	elif len(password)<5:
+		score += 3
+	elif len(password)<7:
+		score += 5
+	   
+	for i in range(1, len(password)):
+		if password[i] != password[0]:
+			score-=1
+
+	if password.isupper():
+		score+=3
+	elif password.islower():
+		score-=1
+	else: 
+		for i in password:
+			if i == ["@","$","!","#","%","^","&","*","(",")"]:
+				score+=2
+			if i==[1,2,3,4,5,6,7,8,9,10,0]:
+				score+=1
+			else: score+=0
+	
+	
+	
+	embed=discord.Embed(tittle="Your password score rating is...",description=f"Your password score is {score}",color=green)
+	await ctx.send(embed=embed)
+
+
 
 
 '''
@@ -211,9 +215,13 @@ pip install DiscordUtils[voice]
 run = """
 pip install py-cord
 pip install DiscordUtils[voice]
+pip install bython
 python main.py
 """
 '''
+client.load_extension("commands.helpp")
+client.load_extension("commands.music")
+
 
 keepAlive()
 my_secret = os.environ['TOKEN']
