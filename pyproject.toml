@@ -8,6 +8,8 @@ authors = ["Zaheeb Tariq aaheeb07@gmail.com"]
 python = "^3.8"
 py-cord = "^1.7.3"
 discord = "^1.7.3"
+wikipedia = "^1.4.0"
+wolframalpha = "^5.0.0"
 
 [tool.poetry.dev-dependencies]
 
