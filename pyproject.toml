@@ -10,6 +10,7 @@ py-cord = "^1.7.3"
 discord = "^1.7.3"
 wikipedia = "^1.4.0"
 wolframalpha = "^5.0.0"
+psutil = "^5.8.0"
 
 [tool.poetry.dev-dependencies]
 
