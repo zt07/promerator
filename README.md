@@ -1,6 +1,24 @@
-# ZT-s-Music
-Creating a Disocrd bot for science fair engineering. The bot will have moderation, messaging and music capabillities.
-The bot is currently indev
-Installation:
-  Download the github files.
-  if you arent using replit you will need to delete the "my_secret = os.environ['TOKEN']" and add an env file in the directory with TOKEN= your token Place your bots token in "your token"
+# Promerator
+A utility bot for Discord, created as a science fair project. The bot is currently in the development stage.
+
+# TODO:
+* [ ] Add moderation features.
+* [ ] Add music features (maybe).
+
+# Installation:
+* Open a terminal/command prompt (PowerShell will not work) where you want the bot to be stored.
+* `git clone https://github.com/zt07/promerator.git`
+* `cd promerator`
+* Create Wolfram Alpha account (here)[https://account.wolfram.com/login/create].
+* Create an app from (here)[https://developer.wolframalpha.com/portal/myapps/].
+* Linux:
+	* `export TOKEN={Your bot's token}`
+	* `export Wolframaplha_appid={The Wolfram AppID}`
+	* `pip3 install -r ./requirements.txt`
+	* `python3 ./main.py`
+* Windows:
+	* `set TOKEN={Your bot's token}`
+	* `set Wolframaplha_appid={The Wolfram AppID}`
+	* `py -m pip install -r ./requirements.txt`
+	* `py ./main.py`
+
