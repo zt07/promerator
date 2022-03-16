@@ -98,6 +98,5 @@ client.load_extension("commands.fun")
 client.load_extension("commands.code")
 
 keepAlive()#Runs function from the keep_alive file which pings the webserver every 5 minutes to keep bot online.
-my_secret = os.environ['TOKEN']
 
 client.run(os.getenv('TOKEN'))#loads the bots token in a Replit secrets folder which stores the toekna dn keeps it out of sight.

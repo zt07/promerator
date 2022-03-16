@@ -26,7 +26,7 @@ class helpp(commands.Cog):
 		embed.add_field(name="setprefix", value="Change the prefix that calls the bot." , inline=True)
 		embed.add_field(name="eight_ball, coin flip", value="Flip a coin or use an 8 ball to determine your decisions! (That was a joke, the 8ball decisions are purely random.)" , inline=True)
 		embed.add_field(name="quote", value="Returns a random quote." , inline=True)
-		embed.add_field(name="py,PY,Python", value="executes python in Jdoodle API and sends back to user, . EX: ;;py print('hello World') or you may send code ina  code block. EX: ```py print(4+4)```" , inline=False)
+		embed.add_field(name="run,code,evaL", value="executes code in Jdoodle API and sends back to user, . EX: ;;run python3 . print('hello World') supported languages include Python3, C and C++(GCC 11.1.0),Ruby,Go,Scala,csharp(mono 4.2.2), Swift,Rust 1.10.0, And all version 4 languages on https://docs.jdoodle.com/compiler-api/compiler-api. Please type ;;help_code for details" , inline=False)
 		embed.add_field(name="latency",value=f'{round(self.client.latency * 1000)}ms')
 		await ctx.send(embed=embed)
 
@@ -48,6 +48,11 @@ class helpp(commands.Cog):
 	@commands.command()
 	async def help_contact(self,ctx):
 		embed= discord.Embed(title=f"Help Contact:",descritpion="For any help you can dm me at zut0_7 on Instagram, or email me at zaheeb07@gmail.com", color = green)
+		await ctx.send(embed=embed)
+
+	@commands.command()
+	async def help_code(self,ctx):
+		embed=discord.Embed(tittle="code help",description="For stdin or console input, add the input after language argument. EX: ;;run python3 40 x=int(input); print(x**2), for no stdin, place any characters to palce hold such as a . or ''.", color=green)
 		await ctx.send(embed=embed)
 
 def setup(client):
