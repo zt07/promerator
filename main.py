@@ -4,7 +4,7 @@
 
 import discord # To comunicate with Discord API
 import asyncio #To use Async and await functions
-import os # allows the program to access our desktop, which includes things such as files.
+import os # Allows the program to access our desktop, which includes things such as files.
 import json # JavaScript Object Notation, it allows us to use data in this format.
 import requests
 from discord.ext import commands #Allows us to use commands such as ;;
@@ -12,7 +12,7 @@ from discord.ext.commands import has_permissions
 import datetime
 import psutil
 
-import random #TO come up with random integers, and choices in an array.
+import random #To come up with random integers, and choices in an array.
 from keep_alive import keepAlive # From our own file keep_alive in order to use a function which starts a web server which we need to keep the bot running. 
 '''
 This code in documentation enough
@@ -95,6 +95,7 @@ client.load_extension("commands.quote")
 client.load_extension("commands.mod")
 client.load_extension("commands.wiki")
 client.load_extension("commands.fun")
+client.load_extension("commands.code")
 
 keepAlive()#Runs function from the keep_alive file which pings the webserver every 5 minutes to keep bot online.
 my_secret = os.environ['TOKEN']

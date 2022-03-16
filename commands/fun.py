@@ -18,7 +18,7 @@ class fun(commands.Cog):
 		self.client=client
 	
 	@commands.command()
-	async def decision(self, ctx,query):
+	async def eight_ball(self, ctx,query):
 		embed=discord.Embed(title=random.choice(responses),color=green)
 		embed.add_field(name="latency",value=f'{round(self.client.latency * 1000)}ms')
 		await ctx.send(embed=embed)
