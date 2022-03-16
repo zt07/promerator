@@ -26,7 +26,7 @@ class helpp(commands.Cog):
 		embed.add_field(name="setprefix", value="Change the prefix that calls the bot." , inline=True)
 		embed.add_field(name="eight_ball, coin flip", value="Flip a coin or use an 8 ball to determine your decisions! (That was a joke, the 8ball decisions are purely random.)" , inline=True)
 		embed.add_field(name="quote", value="Returns a random quote." , inline=True)
-		embed.add_field(name="py,PY,Python", value="executes python in Jdoodle API and sends back to user, dont put code in a code block. EX: ;;py print('hello World')" , inline=False)
+		embed.add_field(name="py,PY,Python", value="executes python in Jdoodle API and sends back to user, . EX: ;;py print('hello World') or you may send code ina  code block. EX: ```py print(4+4)```" , inline=False)
 		embed.add_field(name="latency",value=f'{round(self.client.latency * 1000)}ms')
 		await ctx.send(embed=embed)
 

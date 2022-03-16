@@ -17,15 +17,38 @@ class eval(commands.Cog):
 	def __init__(self,client):
 		self.client=client
 
-	@commands.command()
-	async def py(self, ctx,*,codee):
+	@commands.command(aliases=['PY',"Python"])
+	async def py(self, ctx,*, stdin,codee,):
+		if "```py" in codee:
+			codee=codee[5:-3]
 		global data
 		
 		data ={
    	"script" : f'{codee}',#send scode parameter in the request
    	"language": 'python3',
 		"versionIndex": '3',
-		"stdin": '',
+		"stdin": f'{stdin}',
+   	"clientId": c_ID,
+   	"clientSecret": c_SECRET
+			}
+		header={'content-type': 'application/json'}
+		
+		r=requests.post(url=endpoint, json=data, headers=header)#creates request to that
+		embed=discord.Embed(title=f"Your request has returned with status code {r.json()['statusCode']}",description=f"``` {r.json()['output']} ```",color=green)#embed
+		embed.add_field(name="latency",value=f'{round(self.client.latency * 1000)}ms')#returns latency
+		await ctx.send(embed=embed)
+
+	@commands.command(aliases=["C"])
+	async def c(self, ctx,stdin,type,*, codee):
+		if "```c" in codee:
+			codee=codee[4:-3]
+		global data
+		
+		data ={
+   	"script" : f'{codee}',#send scode parameter in the request
+   	"language": 'c',
+		"versionIndex": '0',
+		"stdin": f'{stdin}',
    	"clientId": c_ID,
    	"clientSecret": c_SECRET
 			}
