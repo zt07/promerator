@@ -10,7 +10,7 @@ green = discord.Color.green()
 Write and execute code in Python using discord
 '''
 
-c_ID = os.environ[Jdoodle_clientID']  #cleint an dsecret id used for Jdoodle API
+c_ID = os.environ['Jdoodle_clientID']  #client an dsecret id used for Jdoodle API
 c_SECRET = os.environ['Jdoodle_ClientSecret']
 endpoint = "https://api.jdoodle.com/execute"  #where request gets sent to
 
@@ -35,7 +35,7 @@ class eval(commands.Cog):
             "script": f'{codee}',  #send scode parameter in the request
             "language": f'{lang}', #Our programming language chosen from the command
             "versionIndex": f'{version}', 			# data is all the JSON data we want to send to Jdoodle API
-            "stdin": f'{stdin}', #ANy console input that may be re
+            "stdin": f'{stdin}', #Any console input that may be required
             "clientId": c_ID,
             "clientSecret": c_SECRET
         }

@@ -52,7 +52,7 @@ class helpp(commands.Cog):
 
 	@commands.command()
 	async def help_code(self,ctx):
-		embed=discord.Embed(tittle="code help",description="For stdin or console input, add the input after language argument. EX: ;;run python3 40 x=int(input); print(x**2), for no stdin, place any characters to palce hold such as a . or ''.", color=green)
+		embed=discord.Embed(tittle="code help",description="For stdin or console input, add the input after language argument. EX: ;;run python3 40 x=int(input); print(x**2), for no stdin, place any characters to place hold such as a . or ''.", color=green)
 		await ctx.send(embed=embed)
 
 def setup(client):
