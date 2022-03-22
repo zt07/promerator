@@ -4,7 +4,7 @@ import os
 import json
 import requests
 from discord.ext import commands
-
+import psutil
 green = discord.Color.green()
 '''
 Write and execute code in Python using discord
@@ -42,7 +42,7 @@ class eval(commands.Cog):
         print(data)
         header = {'content-type': 'application/json'}
 				
-        r = requests.post(url=endpoint, json=data, headers=header)
+        r = requests.post(url=endpoint, json=data, headers=header); print("cpu"); print(psutil.cpu_percent(interval=1)); print("mem"); print(psutil.virtual_memory())
 		
         print(r.json()['output'])  #creates request to that
         embed = discord.Embed(title=f"Your request has returned with status code {r.json()['statusCode']}",description=f"``` {r.json()['output']} ```",color=green)  												#embedembed.add_field(name="latency",value=f'{round(self.client.latency * 1000)}ms')  #returns latency

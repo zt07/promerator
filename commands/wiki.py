@@ -27,20 +27,20 @@ class wiki(commands.Cog):
 			embed.add_field(name="latency",value=f'{round(self.client.latency * 1000)}ms')#returns latency
 			await ctx.send(embed=embed)
 		except:
-			embed=discord.Embed(title="No results:(",description="Try a valid search",color=green)
+			embed=discord.Embed(title="No results:(",description="Try a valid search",color=green) # Returns error if a result cannot be found.
 			await ctx.send(embed=embed)
 			
 	@commands.command()
 	async def search(self,ctx,*,ques):
-		message=discord.Embed(title="Searching...",color=green)
+		message=discord.Embed(title="Searching...",color=green)# sends searching while answer is loading.
 		await ctx.send(embed=message)
-		res=client.query(ques)
+		res=client.query(ques)# WOlfam Alpah returns a query result froma  given question.
 		try:
 			answer = next(res.results).text
 
-			embed=discord.Embed(title="Answer:",description=answer,color=green)
+			embed=discord.Embed(title="Answer:",description=answer,color=green) # retuns the answer if one was found.
 			await ctx.send(embed=embed)
-		except StopIteration:
+		except StopIteration: #If a result cannot be found.
 			embed=discord.Embed(title="Failed",description='No results found.',color=green)
 			
 			await ctx.send(embed=embed)

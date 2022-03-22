@@ -4,7 +4,7 @@ app = Flask("")
 
 @app.route("/")
 def home():
-    return "Server running!"
+    return "<h1>Server running!</h1>"
 def run():
   app.run(host='0.0.0.0',port=8080)
 def keepAlive():
