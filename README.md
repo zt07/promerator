@@ -14,11 +14,15 @@ A utility bot for Discord, created as a science fair project. The bot is current
 * Linux:
 	* `export TOKEN={Your bot's token}`
 	* `export Wolframaplha_appid={The Wolfram AppID}`
+	* `export Jdoodle_clientID={Jdoodles client id)`
+	* `export Jdoodle_ClientSecret={client secret from Jdoodle}
 	* `pip3 install -r ./requirements.txt`
 	* `python3 ./main.py`
 * Windows:
 	* `set TOKEN={Your bot's token}`
 	* `set Wolframaplha_appid={The Wolfram AppID}`
+	* `set Jdoodle_clientID={Jdoodles client id)`
+	* `set Jdoodle_ClientSecret={client secret from Jdoodle}
 	* `py -m pip install -r ./requirements.txt`
 	* `py ./main.py`
 
