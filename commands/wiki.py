@@ -9,9 +9,11 @@ import random
 import wikipedia
 import wolframalpha
 import psutil
+from dotenv import load_dotenv
+load_dotenv()
 green = discord.Color.green()
 #Searches wikipedia page and returns it in Discord.
-app_id=os.environ['Wolframaplha_appid']
+app_id=os.getenv('Wolframaplha_appid')
 
 client=wolframalpha.Client(app_id)
 class wiki(commands.Cog):

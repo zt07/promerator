@@ -21,6 +21,7 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions
 import datetime
 import psutil
+from dotenv import load_dotenv
 
 import random                       # To generate random integers, and choices in an array.
 from keep_alive import keepAlive    # To keep the repl from closing automatically.
@@ -80,7 +81,7 @@ async def randnum(ctx):#Returns a random number with the user specified limits.
     await ctx.send(embed=embed4)
 
 
-
+load_dotenv()
 # Loads cogs intot his main File
 # These cogs are in ./commands/ which is where the majority of commands are placed.							
 client.load_extension("commands.helpp")
@@ -89,8 +90,7 @@ client.load_extension("commands.quote")
 client.load_extension("commands.mod")
 client.load_extension("commands.wiki")
 client.load_extension("commands.fun")
-
-keepAlive() #Keeps the repl alive.
-my_secret = os.environ['TOKEN']
-
-client.run(os.getenv('TOKEN'))# Logs in with the providied token from the host's environment.
+client.load_extension("commands.code")
+#keepAlive() #Keeps the repl alive.
+TOKEN=os.getenv('DISCORD_TOKEN')
+client.run(TOKEN)# Logs in with the providied token from the host's environment.
