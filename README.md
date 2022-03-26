@@ -11,6 +11,7 @@ A utility bot for Discord, created as a science fair project. The bot is current
 * `cd promerator`
 * Create Wolfram Alpha account (here)[https://account.wolfram.com/login/create].
 * Create an app from (here)[https://developer.wolframalpha.com/portal/myapps/].
+* Create a Jdoodle API Token (here) [https://www.jdoodle.com/compiler-api/]
 * Linux:
 	* `export TOKEN={Your bot's token}`
 	* `export Wolframaplha_appid={The Wolfram AppID}`

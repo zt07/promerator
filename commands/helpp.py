@@ -6,7 +6,6 @@ import requests
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 import random
-from keep_alive import keepAlive
 green = discord.Color.green()
 
 class helpp(commands.Cog):

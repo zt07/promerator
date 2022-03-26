@@ -24,7 +24,6 @@ import psutil
 from dotenv import load_dotenv
 
 import random                       # To generate random integers, and choices in an array.
-from keep_alive import keepAlive    # To keep the repl from closing automatically.
 
 custom_prefixes = {}
 default_prefixes = [';;']
@@ -91,6 +90,5 @@ client.load_extension("commands.mod")
 client.load_extension("commands.wiki")
 client.load_extension("commands.fun")
 client.load_extension("commands.code")
-#keepAlive() #Keeps the repl alive.
 TOKEN=os.getenv('DISCORD_TOKEN')
 client.run(TOKEN)# Logs in with the providied token from the host's environment.
