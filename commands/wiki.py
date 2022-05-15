@@ -1,3 +1,4 @@
+from ast import alias
 import discord
 import asyncio
 import os
@@ -29,7 +30,7 @@ class wiki(commands.Cog):
 			embed.add_field(name="latency",value=f'{round(self.client.latency * 1000)}ms')#returns latency
 			await ctx.send(embed=embed)
 		except:
-			embed=discord.Embed(title="No results:(",description="Try a valid search",color=green)
+			embed=discord.Embed(title="No results:(",description="Try a valid search",color=discord.Color.red())
 			await ctx.send(embed=embed)
 			
 	@commands.command()
@@ -43,12 +44,14 @@ class wiki(commands.Cog):
 			embed=discord.Embed(title="Answer:",description=answer,color=green)
 			await ctx.send(embed=embed)
 		except StopIteration:
-			embed=discord.Embed(title="Failed",description='No results found.',color=green)
+			embed=discord.Embed(title="Failed",description='No results found.',color=discord.Color.red())
 			
 			await ctx.send(embed=embed)
 	
+	@commands.command(aliases=['c'])
+	async def calculate(self,ctx):
 
-
+		await ctx.send(1/0)
 
 def setup(client):
 	client.add_cog(wiki(client))

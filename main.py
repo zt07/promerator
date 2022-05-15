@@ -22,7 +22,6 @@ from discord.ext.commands import has_permissions
 import datetime
 import psutil
 from dotenv import load_dotenv
-
 import random                       # To generate random integers, and choices in an array.
 
 custom_prefixes = {}
@@ -55,6 +54,14 @@ async def on_ready():
   await client.change_presence(activity=discord.Game(';;help'))
   print(f' {client.user} is logged in and ready to RUMBLEEEE!!!!')
           # Message to notify the host that the bot is online.
+
+@client.event
+async def on_command_error(ctx, error):
+    embed=discord.Embed(title="An error has occured! check the help command to make sure it is typed right or report an issue on Github, making sure you send the included error message https://github.com/zt07/promerator/issues ",description=f"{error}",color=discord.Color.red() )
+    await ctx.send(embed=embed)
+
+
+
 @client.command()
 async def randnum(ctx):#Returns a random number with the user specified limits.
 		
@@ -79,7 +86,6 @@ async def randnum(ctx):#Returns a random number with the user specified limits.
     
     await ctx.send(embed=embed4)
 
-
 load_dotenv()
 # Loads cogs intot his main File
 # These cogs are in ./commands/ which is where the majority of commands are placed.							
@@ -91,4 +97,5 @@ client.load_extension("commands.wiki")
 client.load_extension("commands.fun")
 client.load_extension("commands.code")
 TOKEN=os.getenv('DISCORD_TOKEN')
-client.run(TOKEN)# Logs in with the providied token from the host's environment.
+
+client.run(str(TOKEN))# Logs in with the providied token from the host's environment.

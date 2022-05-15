@@ -44,7 +44,6 @@ class eval(commands.Cog):
         header = {'content-type': 'application/json'}
 				
         r = requests.post(url=endpoint, json=data, headers=header)
-        print(r)
 		
         embed = discord.Embed(title=f"Your request has returned with status code {r.json()['statusCode']}",description=f"``` {r.json()['output']} ```",color=green)  												#embedembed.add_field(name="latency",value=f'{round(self.client.latency * 1000)}ms')  #returns latency
         await ctx.send(embed=embed)

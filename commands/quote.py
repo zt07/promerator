@@ -6,7 +6,6 @@ import requests
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 import random,psutil
-from keep_alive import keepAlive
 green = discord.Color.green()
 
 def grab_quote(): #defining a fuction here so we can just call or type out "grab_quote()" instead of what is below.
