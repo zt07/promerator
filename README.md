@@ -16,7 +16,7 @@ A utility bot for Discord, The bot is currently in the development stage.
 	* `export TOKEN={Your bot's token}`
 	* `export Wolframaplha_appid={The Wolfram AppID}`
 	* `export Jdoodle_clientID={Jdoodles client id)`
-	* `export Jdoodle_ClientSecret={client secret from Jdoodle}
+	* `export Jdoodle_ClientSecret={client secret from Jdoodle}`
 	* `pip3 install -r ./requirements.txt`
 	* `python3 ./main.py`
 * Windows:
