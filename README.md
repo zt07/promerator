@@ -23,7 +23,7 @@ A utility bot for Discord, The bot is currently in the development stage.
 	* `set TOKEN={Your bot's token}`
 	* `set Wolframaplha_appid={The Wolfram AppID}`
 	* `set Jdoodle_clientID={Jdoodles client id)`
-	* `set Jdoodle_ClientSecret={client secret from Jdoodle}
+	* `set Jdoodle_ClientSecret={client secret from Jdoodle}`
 	* `py -m pip install -r ./requirements.txt`
 	* `py ./main.py`
 
