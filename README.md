@@ -1,9 +1,9 @@
 # Promerator
-A utility bot for Discord, created as a science fair project. The bot is currently in the development stage.
+A utility bot for Discord, The bot is currently in the development stage.
 
 # TODO:
 * [ ] Add moderation features.
-* [ ] Add music features (maybe).
+
 
 # Installation:
 * Open a terminal/command prompt (PowerShell will not work) where you want the bot to be stored.
